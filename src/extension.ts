@@ -53,10 +53,13 @@ export function activate(context: vscode.ExtensionContext) {
 
 		let document: vscode.TextDocument = editor.document;
 		let fileName: string = document.fileName;
+		// Get custom mappings from configuration
+		const config = vscode.workspace.getConfiguration('railsGoToSpec');
+		const customMappings = config.get<Array<{pattern: string, target: string}>>('customMappings', []);
 		// Get a list of related files
 		// if any of those exists, open it
 		// Otherwise prompt to create the first one
-		let related: Array<string> = resolver.getRelated(fileName);
+		let related: Array<string> = resolver.getRelated(fileName, customMappings);
 
 		for (let relatedFile of related) {
 			let fileExists: boolean = fs.existsSync(relatedFile);

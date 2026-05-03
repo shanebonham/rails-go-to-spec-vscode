@@ -38,6 +38,31 @@
           "group": "railsgotospec"
         }
       ]
+    },
+    "configuration": {
+      "title": "Rails Go to Spec",
+      "properties": {
+        "railsGoToSpec.customMappings": {
+          "type": "array",
+          "default": [],
+          "description": "Custom regex patterns for mapping between code and spec files",
+          "items": {
+            "type": "object",
+            "properties": {
+              "pattern": {
+                "type": "string",
+                "description": "Regex pattern to match file paths"
+              },
+              "target": {
+                "type": "string",
+                "description": "Target path with $1, $2 replacements for capture groups"
+              }
+            },
+            "required": ["pattern", "target"],
+            "additionalProperties": false
+          }
+        }
+      }
     }
   },
   "scripts": {
